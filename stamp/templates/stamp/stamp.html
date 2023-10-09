@@ -7,6 +7,8 @@
 </head>
 <body>
     <h1>テスト</h1>
+    <p>{{ request.user.first_name }}</p>
+    <a href="{% url 'logout' %}">ログアウト</a>
     <script src="{% static 'js/stamp.js' %}"></script>
 </body>
 </html>
