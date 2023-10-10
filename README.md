@@ -30,5 +30,9 @@ pip install -r requirements.txt
 ### 動作確認をする
 
 ```
+python3 manage.py migrate
+```
+
+```
 python3 manage.py runserver
 ```
