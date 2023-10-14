@@ -140,3 +140,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SOCIAL_AUTH_LINE_KEY = os.environ.get('SOCIAL_AUTH_LINE_KEY')
 SOCIAL_AUTH_LINE_SECRET = os.environ.get('SOCIAL_AUTH_LINE_SECRET')
+LOGIN_URL = '/login/'

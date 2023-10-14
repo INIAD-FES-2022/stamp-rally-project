@@ -1,10 +1,11 @@
 from .models import Stamp
 from django.shortcuts import render
 from django.views.generic import TemplateView, RedirectView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class stamp(TemplateView):
+class stamp(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp.html"
     def get_context_data(self, **kwargs):
         try:
