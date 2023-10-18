@@ -22,19 +22,26 @@ class stamp(LoginRequiredMixin, TemplateView):
             print("ユーザー情報を新規作成しました。")
 
         # htmlに渡すテンプレートの値
-        # {{ user }} や {{ stamps }} で取得可能
+        # {{ user }} や {{ stamps }}、{{stamped}} で取得可能
 
         # {{ user }} は各ユーザーが持つ一意の文字列
         # {{ stamps }} はbool値のリスト
+        # {{ stamped }} は新たに押されたスタンプの番号(query_lst基準)
+        #   もし押されていない場合は10と定義します。
+
+
         context = super().get_context_data(**kwargs)
         context["user"] = user_info.user
         context["stamps"] = user_info.stamps
+        context["stamped"] = 10
 
         # スタンプ付与
         if "sponser" in self.request.GET:
             query = self.request.GET.get("sponser")
             if query in query_lst:
                 update_stamps = user_info.stamps
+                if not update_stamps[query_lst.index(query)]:
+                    context["stamped"] = [query_lst.index(query)]
                 update_stamps[query_lst.index(query)] = True
                 
                 user_info.stamps = update_stamps
