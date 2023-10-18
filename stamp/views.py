@@ -5,7 +5,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # ここにQRが持つクエリパラメータを陳列
 # https://stampのトップページURL/?sponser=クエリパラメータ
-query_lst = ["dummy0", "dummy1", "dummy2", "dummy3", "dummy4", "dummy5"]
+# query_lst[0] = アピレ
+# query_lst[1] = イトーヨーカドー
+# query_lst[2] = Beans
+# query_lst[3] = ビビオ
+# query_lst[4] = キャンパス
+query_lst = ["404e8cfd-2088-d1e6-3369-d00c3fb8ab4c",
+             "d5ba3cc4-d672-e462-91ad-73a437ecc483",
+             "9c97ecc8-e619-47d6-4373-a9961b0fef0d",
+             "2c548a77-cc36-e843-ffe2-60e9c5c71869",
+             "4ac4de3d-dade-8486-5918-19b33fdcfe63",]
 
 class stamp(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp.html"
@@ -17,7 +26,7 @@ class stamp(LoginRequiredMixin, TemplateView):
 
         # 初期設定
         except Stamp.DoesNotExist:
-            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
+            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False])
             user_info = Stamp.objects.get(user=self.request.user)
             print("ユーザー情報を新規作成しました。")
 
@@ -52,7 +61,7 @@ class stamp(LoginRequiredMixin, TemplateView):
             # デバッグ用
             elif query == "reset":
                 update_stamps = user_info.stamps
-                update_stamps = [False,False,False,False,False,False]
+                update_stamps = [False,False,False,False,False]
                 
                 user_info.stamps = update_stamps
                 user_info.save()
