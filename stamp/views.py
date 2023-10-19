@@ -3,8 +3,13 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# ここにQRが持つクエリパラメータを陳列
-# https://stampのトップページURL/?sponser=クエリパラメータ
+# 各地のQRが持つURL
+# https://ドメイン/stamp/get/UUID/
+
+# パンフレットに載せるQRが持つURL
+# https://ドメイン/stamp/ もしくは https://ドメイン/login/
+
+# 各協賛のUUID
 # query_lst[0] = アピレ
 # query_lst[1] = イトーヨーカドー
 # query_lst[2] = Beans
@@ -31,52 +36,70 @@ class stamp(LoginRequiredMixin, TemplateView):
             print("ユーザー情報を新規作成しました。")
 
         # htmlに渡すテンプレートの値
-        # {{ user }} や {{ stamps }}、{{stamped}} で取得可能
+        # {{ user }} や {{ stamps }} で取得可能
 
         # {{ user }} は各ユーザーが持つ一意の文字列
         # {{ stamps }} はbool値のリスト
-        # {{ stamped }} は新たに押されたスタンプの番号(query_lst基準)
-        #   もし押されていない場合は10と定義します。
-
 
         context = super().get_context_data(**kwargs)
         context["user"] = user_info.user
         context["stamps"] = user_info.stamps
-        context["stamped"] = 10
-
-        # スタンプ付与
-        if "sponser" in self.request.GET:
-            query = self.request.GET.get("sponser")
-            if query in query_lst:
-                update_stamps = user_info.stamps
-                if not update_stamps[query_lst.index(query)]:
-                    context["stamped"] = [query_lst.index(query)]
-                update_stamps[query_lst.index(query)] = True
-                
-                user_info.stamps = update_stamps
-                user_info.save()
-
-                context["stamps"] = update_stamps
-
-            # デバッグ用
-            elif query == "reset":
-                update_stamps = user_info.stamps
-                update_stamps = [False,False,False,False,False]
-                
-                user_info.stamps = update_stamps
-                user_info.save()
-
-                context["stamps"] = update_stamps
-
-            # デバッグ用                
-            elif query == "print":
-                print(context["user"])
-                print(context["stamps"])
 
         return context
     
-class stamp_get(TemplateView):
+class stamp_get(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp_get.html"
+    def get_context_data(self, **kwargs):
+
+        # ユーザー情報取得
+        try:
+            user_info = Stamp.objects.get(user=self.request.user)
+
+        # 初期設定
+        except Stamp.DoesNotExist:
+            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False])
+            user_info = Stamp.objects.get(user=self.request.user)
+            print("ユーザー情報を新規作成しました。")
+
+        # htmlに渡すテンプレートの値
+        # {{ user }} や {{stamped}} で取得可能
+
+        # {{ user }} は各ユーザーが持つ一意の文字列
+        # {{ stamped }} はスタンプが新たに押されたかどうかのbool値
+            # 初回のみ演出ではない場合、無視してもらって大丈夫です。
+
+        context = super().get_context_data(**kwargs)
+        context["user"] = user_info.user
+        context["stamped"] = False
+
+        # スタンプ付与
+        query = self.kwargs["sponser"]
+        if query in query_lst:
+            update_stamps = user_info.stamps
+            if not update_stamps[query_lst.index(query)]:
+                context["stamped"] = True
+            update_stamps[query_lst.index(query)] = True
+                
+            user_info.stamps = update_stamps
+            user_info.save()
+
+        # デバッグ用
+        if query == "reset":
+            update_stamps = user_info.stamps
+            update_stamps = [False,False,False,False,False]
+                
+            user_info.stamps = update_stamps
+            user_info.save()
+
+            context["stamps"] = update_stamps
+
+        # デバッグ用                
+        elif query == "print":
+            print(context["user"])
+            print(context["stamped"])
+            print(user_info.stamps)
+
+        return context
 
 class redirect_stamp(RedirectView):
     url = "http://127.0.0.1:8000/stamp/"
