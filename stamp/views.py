@@ -74,6 +74,9 @@ class stamp(LoginRequiredMixin, TemplateView):
                 print(context["stamps"])
 
         return context
+    
+class stamp_get(TemplateView):
+    template_name = "stamp/stamp_get.html"
 
 class redirect_stamp(RedirectView):
     url = "http://127.0.0.1:8000/stamp/"

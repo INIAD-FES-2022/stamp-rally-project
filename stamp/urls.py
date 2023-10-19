@@ -9,4 +9,5 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path("stamp/", views.stamp.as_view(), name="stamp"),
+    path("stamp/get/<str:sponser>/", views.stamp_get.as_view(), name="stamp_get")
 ]
