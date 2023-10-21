@@ -31,7 +31,7 @@ class stamp(LoginRequiredMixin, TemplateView):
 
         # 初期設定
         except Stamp.DoesNotExist:
-            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False])
+            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
             user_info = Stamp.objects.get(user=self.request.user)
             print("ユーザー情報を新規作成しました。")
 
@@ -40,6 +40,7 @@ class stamp(LoginRequiredMixin, TemplateView):
 
         # {{ user }} は各ユーザーが持つ一意の文字列
         # {{ stamps }} はbool値のリスト
+        # {{ stamps[0]~[4] が各地のスタンプ、stamps[5] は景品の獲得有無 }}
 
         context = super().get_context_data(**kwargs)
         context["user"] = user_info.user
@@ -57,12 +58,12 @@ class stamp_get(LoginRequiredMixin, TemplateView):
 
         # 初期設定
         except Stamp.DoesNotExist:
-            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False])
+            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
             user_info = Stamp.objects.get(user=self.request.user)
             print("ユーザー情報を新規作成しました。")
 
         # htmlに渡すテンプレートの値
-        # {{ user }} や {{stamped}} で取得可能
+        # {{ user }} や {{ stamped }} で取得可能
 
         # {{ user }} は各ユーザーが持つ一意の文字列
         # {{ stamped }} はスタンプが新たに押されたかどうかのbool値
@@ -86,7 +87,7 @@ class stamp_get(LoginRequiredMixin, TemplateView):
         # デバッグ用
         if query == "reset":
             update_stamps = user_info.stamps
-            update_stamps = [False,False,False,False,False]
+            update_stamps = [False,False,False,False,False,False]
                 
             user_info.stamps = update_stamps
             user_info.save()
@@ -98,6 +99,44 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             print(context["user"])
             print(context["stamped"])
             print(user_info.stamps)
+
+        return context
+    
+class stamp_prize(LoginRequiredMixin, TemplateView):
+    template_name = "stamp/stamp_prize.html"
+    def get_context_data(self, **kwargs):
+
+        # ユーザー情報取得
+        try:
+            user_info = Stamp.objects.get(user=self.request.user)
+
+        # 初期設定
+        except Stamp.DoesNotExist:
+            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
+            user_info = Stamp.objects.get(user=self.request.user)
+            print("ユーザー情報を新規作成しました。")
+
+        # htmlに渡すテンプレートの値
+        # {{ user }} や {{ stamps }} で取得可能
+
+        # {{ user }} は各ユーザーが持つ一意の文字列
+        # {{ stamps }} はbool値のリスト
+        # {{ stamps[0]~[4] が各地のスタンプ、stamps[5] は景品の獲得有無 }}
+
+        context = super().get_context_data(**kwargs)
+        context["user"] = user_info.user
+        context["stamps"] = user_info.stamps
+
+        # 景品の管理
+        query = self.request.GET.get("used")
+        if query=="true":
+            update_stamps = user_info.stamps
+            update_stamps[5] = True
+                
+            user_info.stamps = update_stamps
+            user_info.save()
+
+            context["stamps"] = update_stamps
 
         return context
 
