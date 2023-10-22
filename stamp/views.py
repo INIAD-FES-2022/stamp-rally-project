@@ -15,11 +15,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # query_lst[2] = Beans
 # query_lst[3] = ビビオ
 # query_lst[4] = キャンパス
-query_lst = ["404e8cfd-2088-d1e6-3369-d00c3fb8ab4c",
-             "d5ba3cc4-d672-e462-91ad-73a437ecc483",
-             "9c97ecc8-e619-47d6-4373-a9961b0fef0d",
-             "2c548a77-cc36-e843-ffe2-60e9c5c71869",
-             "4ac4de3d-dade-8486-5918-19b33fdcfe63",]
+query_lst = ["90400d45-8c8f-45d2-b384-d0f58f1b8f67",
+             "cf46968e-247d-4148-93c9-7b0e8518efcc",
+             "5bb08df7-8ac1-4cc9-a039-a9a9cbdfadca",
+             "d44658d9-cc4c-4025-a6d6-c3c90ac45a6b",
+             "46e79bc5-d968-465d-92bb-4b721f715d92",]
 
 class stamp(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp.html"
