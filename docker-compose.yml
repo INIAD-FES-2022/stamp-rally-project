@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  database:
+    image: postgres
+    env_file:
+      - ".env"
+
+  web:
+    build: .
+    env_file:
+      - ".env"
+    volumes:
+      - .:${APP_ROOT}
+      - static:$STATIC_ROOT
+      - media:$MEDIA_ROOT
+    links:
+      - database
+
+  nginx:
+    image: nginx
+    env_file:
+      - ".env"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/templates/default.conf.template
+      - static:$STATIC_ROOT
+      - media:$MEDIA_ROOT
+    links:
+      - web
+    ports:
+      - "80:80"
+
+
+volumes:
+  static:
+    driver: local
+  media:
+    driver: local
