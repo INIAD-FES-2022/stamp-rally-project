@@ -140,6 +140,9 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
 
         return context
 
+class stamp_map(LoginRequiredMixin, TemplateView):
+    template_name = "stamp/stamp_map.html"
+
 class redirect_stamp(RedirectView):
     url = "http://127.0.0.1:8000/stamp/"
 rd_index = redirect_stamp.as_view()
