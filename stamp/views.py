@@ -139,3 +139,6 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
             context["stamps"] = update_stamps
 
         return context
+
+class stamp_map(LoginRequiredMixin, TemplateView):
+    template_name = "stamp/stamp_map.html"
