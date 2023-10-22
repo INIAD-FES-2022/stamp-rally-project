@@ -1,6 +1,6 @@
 from .models import Stamp
 from django.shortcuts import render
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # 各地のQRが持つURL
@@ -139,7 +139,3 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
             context["stamps"] = update_stamps
 
         return context
-
-class redirect_stamp(RedirectView):
-    url = "http://127.0.0.1:8000/stamp/"
-rd_index = redirect_stamp.as_view()
