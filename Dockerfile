@@ -4,6 +4,6 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-EXPOSE 80
+ENTRYPOINT ["sudo", "nginx"]
 
-CMD ["sudo", "nginx"]
+EXPOSE 80
