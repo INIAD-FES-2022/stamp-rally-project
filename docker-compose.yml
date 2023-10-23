@@ -15,9 +15,9 @@ services:
       - certbot
 
   certbot:
-    image: certbot/certbot:v1.7.0
+    image: certbot/certbot
     env_file:
       - ".env"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
-    command: certbot certonly --standalone -d ${SERVER_NAME} --email s1f102101536@iniad.org --agree-tos --no-eff-email
+    command: certbot certonly --standalone -d stamp.akabanedai-fes.com --email example@email.com --agree-tos --no-eff-email
