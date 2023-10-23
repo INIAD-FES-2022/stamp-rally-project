@@ -9,4 +9,4 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/templates/default.conf.template
       - /etc/letsencrypt:/etc/letsencrypt
     ports:
-      - 80:80
+      - 3000:80
