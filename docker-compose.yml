@@ -7,6 +7,7 @@ services:
       - ".env"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/templates/default.conf.template
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"
@@ -19,4 +20,4 @@ services:
       - ".env"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
-    command: certbot certonly --standalone -d ${SERVER_NAME} --email ${EMAIL_ADDRESS} --agree-tos --no-eff-email
+    command: certbot certonly --standalone -d ${SERVER_NAME} --email s1f102101536@iniad.org --agree-tos --no-eff-email
