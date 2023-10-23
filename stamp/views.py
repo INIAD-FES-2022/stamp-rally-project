@@ -142,3 +142,6 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
 
 class stamp_map(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp_map.html"
+
+class ssl(TemplateView):
+    template_name = "stamp/dummy.html"
