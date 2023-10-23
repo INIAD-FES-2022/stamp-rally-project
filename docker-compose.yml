@@ -19,7 +19,7 @@ services:
     links:
       - database
     ports:
-      - 80:8000
+      - 443:443
 
 volumes:
   static:
