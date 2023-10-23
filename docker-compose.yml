@@ -18,6 +18,8 @@ services:
       - media:$MEDIA_ROOT
     links:
       - database
+    ports:
+      - 80:80
 
 volumes:
   static:
