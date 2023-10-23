@@ -6,9 +6,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>login</title>
+    <link rel="stylesheet" href="{% static 'css/logo.css' %}">
   </head>
 
   <body>
-    <a href="{% url 'social:begin' 'line' %}?next={{ next }}">lineログイン</a>
+    <div class="container">
+      <div class="logo-container">
+          <img class="logo" src="{% static 'img/logo.png' %}" alt="スタンプラリー">
+      </div>
+      <div class="custom-login">
+          Login
+      </div>
+      <div class="login-container">
+        <a href="{% url 'social:begin' 'line' %}?next={{ next }}" class="line-login">
+          <img src="{% static 'img/LINE.png' %}" alt="LINE Icon" class="line-icon">
+          <span class="line-text-bold">LINE</span>
+          <span class="line-text-normal">で新規登録</span>
+        </a>
+        <div class="logged-in-area">
+          ログイン済みの方はこちら
+        </div>
+      </div>
+      <p class="info-text">
+          赤羽に設置された5か所のQRコードを読み込んでスマホでサクサクスタンプをためよう!
+          <br>
+          すべてのスタンプが集まったら七福神広場で素敵な景品と交換しにいこう！
+      </p>
+  </div>
   </body>
 </html>
