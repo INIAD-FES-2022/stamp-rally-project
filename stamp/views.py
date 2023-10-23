@@ -132,7 +132,7 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
         if query=="true":
             update_stamps = user_info.stamps
             update_stamps[5] = True
-                
+
             user_info.stamps = update_stamps
             user_info.save()
 
