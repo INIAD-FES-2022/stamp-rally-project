@@ -20,4 +20,4 @@ services:
       - ".env"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
-    command: certbot certonly --standalone -d stamp.akabanedai-fes.com --email example@email.com --agree-tos --no-eff-email
+    command: ["certonly", "--standalone", "--email", "example@email.com", "--agree-tos", "--no-eff-email", "-d", "stamp.akabanedai-fes.com"]
