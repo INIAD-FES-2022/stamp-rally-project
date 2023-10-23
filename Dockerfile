@@ -13,6 +13,6 @@ RUN chmod 755 /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 
-EXPOSE 8000
+EXPOSE 80
 
 CMD ["gunicorn", "-b", "0.0.0.0", "config.wsgi:application"]
