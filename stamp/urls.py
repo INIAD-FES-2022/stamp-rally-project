@@ -11,5 +11,4 @@ urlpatterns = [
     path("stamp/get/<str:sponser>/", views.stamp_get.as_view(), name="stamp_get"),
     path("stamp/prize/", views.stamp_prize.as_view(), name="stamp_prize"),
     path("stamp/map/", views.stamp_map.as_view(), name="stamp_map"),
-    path(".well-known/acme-challenge/<str:string>", views.acme_challenge_view)
 ]
