@@ -11,13 +11,3 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - certbot
-
-  certbot:
-    image: certbot/certbot
-    env_file:
-      - ".env"
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-    command: ["certonly", "--standalone", "--email", "example@email.com", "--agree-tos", "--no-eff-email", "--dry-run", "-v", "-d", "stamp.akabanedai-fes.com"]
