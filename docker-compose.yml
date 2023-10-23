@@ -8,5 +8,3 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/templates/default.conf.template
       - /etc/letsencrypt:/etc/letsencrypt
-    ports:
-      - 3000:80
