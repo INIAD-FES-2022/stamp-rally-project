@@ -19,7 +19,7 @@ services:
     links:
       - database
     ports:
-      - 80:80
+      - 80:8000
 
 volumes:
   static:
