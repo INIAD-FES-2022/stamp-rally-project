@@ -2,6 +2,13 @@ from .models import Stamp
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
+
+def acme_challenge_view(request, challenge):
+    response_content = challenge
+
+    # HTTPステータスコード200とチャレンジの値を含んだファイルの内容を返す
+    return HttpResponse(response_content, content_type="text/plain")
 
 # 各地のQRが持つURL
 # https://ドメイン/stamp/get/UUID/
