@@ -8,6 +8,8 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/templates/default.conf.template
       - /etc/letsencrypt:/etc/letsencrypt
+      - static:${STATIC_ROOT}
+      - media:${MEDIA_ROOT}
     ports:
       - 80:80
       - 443:443
