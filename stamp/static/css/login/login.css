@@ -19,7 +19,6 @@ body {
     z-index: -1; 
     width: auto; 
     height: auto;
-    background: url('path/to/your/image.jpg') no-repeat left top; 
     background-size: cover;
     width: 40%; 
     height: 27%; 
@@ -33,7 +32,6 @@ body {
     z-index: -1; 
     width: auto; 
     height: auto;
-    background: url('path/to/your/image.jpg') no-repeat left top; 
     background-size: cover;
     width: 43%; 
     height: 20%; 
