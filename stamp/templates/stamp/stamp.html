@@ -1,27 +1,4 @@
 {% extends "base.html" %}
-<<<<<<< HEAD
-<!--
-<!DOCTYPE html>
-    {% load static %}
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>stamp</title>
-</head>
-<body>
-    <h1>テスト</h1>
-    <p>{{ request.user.first_name }}</p>
-    <p>{{ user }}</p>
-    {% for stamp in stamps %}
-        <p>{{ stamp }}</p>
-    {% endfor %}
-    <a href="{% url 'logout' %}">ログアウト</a>
-    <script src="{% static 'js/stamp.js' %}"></script>
-</body>
-</html>
--->
-=======
->>>>>>> 0de7676 (Merge pull request #3 from yu7400ki/main)
 {% load static %}
 
 {% block head %}
@@ -30,14 +7,6 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
-<h1>テスト</h1>
-{% for stamp in stamps %}
-    <p>{{ stamp }}</p>
-{% endfor %}
-<p>{{ request.user.first_name }}</p>
-<a href="{% url 'logout' %}" class="stamp-logout_button">ログアウト</a>
-=======
 <div>
     <canvas id="stamp-sheet" width="1080" height="1920"></canvas>
 </div>
@@ -77,5 +46,4 @@
         }
     })
 </script>
->>>>>>> 0de7676 (Merge pull request #3 from yu7400ki/main)
 {% endblock %}
