@@ -7,6 +7,14 @@
 </head>
 <body>
     <h1>テスト</h1>
+    <p>{{ user }}</p>
+    {% for stamp in stamps %}
+        {% if stamp is True %}
+            <p>true</p>
+        {% else %}
+            <p>false</p>
+        {% endif %}
+    {% endfor %}
     <a href="{% url 'stamp_prize' %}?used=true">ガラポンを回す</a>
 </body>
 </html>

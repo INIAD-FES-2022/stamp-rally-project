@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
     <a href="{% url 'social:begin' 'line' %}?next={{ next }}">lineログイン</a>
   </body>
 </html>
