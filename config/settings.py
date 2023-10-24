@@ -86,6 +86,8 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'stamp'
 LOGOUT_REDIRECT_URL = 'login'
 
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
