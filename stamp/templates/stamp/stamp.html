@@ -10,11 +10,7 @@
     <p>{{ request.user.first_name }}</p>
     <p>{{ user }}</p>
     {% for stamp in stamps %}
-        {% if stamp is True %}
-            <p>true</p>
-        {% else %}
-            <p>false</p>
-        {% endif %}
+        <p>{{ stamp }}</p>
     {% endfor %}
     <a href="{% url 'logout' %}">ログアウト</a>
     <script src="{% static 'js/stamp.js' %}"></script>
