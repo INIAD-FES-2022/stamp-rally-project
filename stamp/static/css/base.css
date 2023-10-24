@@ -1,0 +1,10 @@
+@layer reset, base, utilities;
+
+@import url("https://unpkg.com/tailwindcss@3.3.3/src/css/preflight.css") layer(reset);
+
+@layer base {
+  body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 500;
+  }
+}
