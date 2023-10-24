@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+<!--
 <!DOCTYPE html>
     {% load static %}
 <html>
@@ -12,3 +14,16 @@
     <script src="{% static 'js/stamp.js' %}"></script>
 </body>
 </html>
+-->
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/stamp/stamp.css' %}">
+<title>stamp</title>
+{% endblock %}
+
+{% block content %}
+<h1>テスト</h1>
+<p>{{ request.user.first_name }}</p>
+<a href="{% url 'logout' %}" class="stamp-logout_button">ログアウト</a>
+{% endblock %}
