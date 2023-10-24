@@ -28,6 +28,9 @@
 
 {% block content %}
 <h1>テスト</h1>
+{% for stamp in stamps %}
+    <p>{{ stamp }}</p>
+{% endfor %}
 <p>{{ request.user.first_name }}</p>
 <a href="{% url 'logout' %}" class="stamp-logout_button">ログアウト</a>
 {% endblock %}

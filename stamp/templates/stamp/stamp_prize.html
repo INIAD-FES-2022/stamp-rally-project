@@ -9,7 +9,7 @@
     <h1>テスト</h1>
     <p>{{ user }}</p>
     {% for stamp in stamps %}
-        {{ stamp }}
+        <p>{{ stamp }}</p>
     {% endfor %}
     <a href="{% url 'stamp_prize' %}?used=true">ガラポンを回す</a>
 </body>
