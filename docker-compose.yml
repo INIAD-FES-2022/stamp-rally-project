@@ -14,8 +14,8 @@ services:
       - ".env"
     volumes:
       - .:${APP_ROOT}
-      - stamp:$STATIC_ROOT
-      - media:$MEDIA_ROOT
+      - static:${STATIC_ROOT}
+      - media:${MEDIA_ROOT}
     links:
       - database
     ports:
