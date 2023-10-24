@@ -1,20 +1,4 @@
 {% extends "base.html" %}
-<!--
-<!DOCTYPE html>
-    {% load static %}
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>stamp</title>
-</head>
-<body>
-    <h1>テスト</h1>
-    <p>{{ request.user.first_name }}</p>
-    <a href="{% url 'logout' %}">ログアウト</a>
-    <script src="{% static 'js/stamp.js' %}"></script>
-</body>
-</html>
--->
 {% load static %}
 
 {% block head %}
@@ -23,7 +7,43 @@
 {% endblock %}
 
 {% block content %}
-<h1>テスト</h1>
-<p>{{ request.user.first_name }}</p>
-<a href="{% url 'logout' %}" class="stamp-logout_button">ログアウト</a>
+<div>
+    <canvas id="stamp-sheet" width="1080" height="1920"></canvas>
+</div>
+
+<script>
+    const stampOffsets = [
+        { x: 662, y: 162 },
+        { x: 213, y: 452 },
+        { x: 662, y: 742 },
+        { x: 213, y: 1032 },
+        { x: 662, y: 1322 },
+    ];
+
+    const sheet = document.getElementById("stamp-sheet");
+    const ctx = sheet.getContext("2d");
+    const sheetSrc = "{% static 'image/stamp/sheet.png' %}";
+    const stampSrc = "{% static 'image/stamp/stamp.png' %}";
+
+    const sheetImg = new Image();
+    sheetImg.src = sheetSrc;
+    sheetImg.onload = () => {
+        ctx.drawImage(sheetImg, 0, 0);
+    };
+    const True = true;
+    const False = false;
+    {% autoescape off %}
+    const isHaveStamp = {{ stamps  }}
+    {% endautoescape %}
+    isHaveStamp.pop()
+    isHaveStamp.forEach((stamp, index) => {
+        if (stamp) {
+            const stampImg = new Image();
+            stampImg.src = stampSrc;
+            stampImg.onload = () => {
+                ctx.drawImage(stampImg, stampOffsets[index].x, stampOffsets[index].y);
+            };
+        }
+    })
+</script>
 {% endblock %}
