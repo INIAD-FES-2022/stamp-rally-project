@@ -8,7 +8,6 @@ COPY ./requirements.txt /usr/src/app
 RUN pip install -r requirements.txt
 
 COPY . /usr/src/app
-RUN mkdir /var/lib/static
 COPY ./stamp/static /var/lib/static
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod 755 /usr/local/bin/entrypoint.sh
