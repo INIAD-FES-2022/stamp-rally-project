@@ -33,7 +33,7 @@ class stamp(LoginRequiredMixin, TemplateView):
         except Stamp.DoesNotExist:
             Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
             user_info = Stamp.objects.get(user=self.request.user)
-            print("ユーザー情報を新規作成しました。")
+            print("ユーザー情報を新規作成しました。", flush=True)
 
         # htmlに渡すテンプレートの値
         # {{ user }} や {{ stamps }} で取得可能
@@ -60,7 +60,7 @@ class stamp_get(LoginRequiredMixin, TemplateView):
         except Stamp.DoesNotExist:
             Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
             user_info = Stamp.objects.get(user=self.request.user)
-            print("ユーザー情報を新規作成しました。")
+            print("ユーザー情報を新規作成しました。", flush=True)
 
         # htmlに渡すテンプレートの値
         # {{ user }} や {{ stamped }} で取得可能
@@ -96,9 +96,9 @@ class stamp_get(LoginRequiredMixin, TemplateView):
 
         # デバッグ用                
         elif query == "print":
-            print(context["user"])
-            print(context["stamped"])
-            print(user_info.stamps)
+            print(context["user"], flush=True)
+            print(context["stamped"], flush=True)
+            print(user_info.stamps, flush=True)
 
         return context
     
@@ -114,7 +114,7 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
         except Stamp.DoesNotExist:
             Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
             user_info = Stamp.objects.get(user=self.request.user)
-            print("ユーザー情報を新規作成しました。")
+            print("ユーザー情報を新規作成しました。", flush=True)
 
         # htmlに渡すテンプレートの値
         # {{ user }} や {{ stamps }} で取得可能
