@@ -46,6 +46,17 @@ class stamp(LoginRequiredMixin, TemplateView):
         context["user"] = user_info.user
         context["stamps"] = user_info.stamps
 
+        # 景品の管理
+        query = self.request.GET.get("used")
+        if query=="true":
+            update_stamps = user_info.stamps
+            update_stamps[5] = True
+                
+            user_info.stamps = update_stamps
+            user_info.save()
+
+            context["stamps"] = update_stamps
+
         return context
     
 class stamp_get(LoginRequiredMixin, TemplateView):
@@ -126,17 +137,6 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["user"] = user_info.user
         context["stamps"] = user_info.stamps
-
-        # 景品の管理
-        query = self.request.GET.get("used")
-        if query=="true":
-            update_stamps = user_info.stamps
-            update_stamps[5] = True
-                
-            user_info.stamps = update_stamps
-            user_info.save()
-
-            context["stamps"] = update_stamps
 
         return context
 
