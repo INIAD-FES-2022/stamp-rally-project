@@ -146,3 +146,9 @@ class stamp_map(LoginRequiredMixin, TemplateView):
 class redirect_stamp(RedirectView):
     url = "https://stamp.akabanedai-fes.com/stamp/"
 rd_index = redirect_stamp.as_view()
+
+# 500エラー確認用
+from django.http import HttpResponseServerError
+def my_test_500_view(request):
+    # Return an "Internal Server Error" 500 response code.
+    return HttpResponseServerError
