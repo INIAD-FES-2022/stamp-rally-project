@@ -47,7 +47,7 @@ body {
 }
 
 .stamp_get-stamp_gif{
-    max-width: 70%;
+    max-width: 90%;
 }
 
 .stamp_get-back_container{
@@ -75,6 +75,9 @@ body {
 }
 
 @media (max-width: 400px) {
+    .stamp_get-stamp_gif{
+        max-width: 80%;
+    }
     .stamp_get-back_container{
         width: 75%;
         height: 55px;
