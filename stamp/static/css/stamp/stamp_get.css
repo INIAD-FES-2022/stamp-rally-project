@@ -1,0 +1,101 @@
+body {
+    background-color: #F4E4D7;
+    margin: 0;
+    height: 100vh;
+}
+
+.stamp_get-container {
+    max-width: 100vw;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    grid-template-rows:1fr 2fr 0.4fr 1fr;
+}
+
+.stamp_get-background_image1{
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    z-index: -1; 
+    width: auto; 
+    height: auto;
+    background-size: cover;
+    width: 40%; 
+    height: 27%; 
+    
+}
+
+.stamp_get-background_image2{
+    position: absolute;
+    bottom: 0; 
+    right: 0; 
+    z-index: -1; 
+    width: auto; 
+    height: auto; 
+    background-size: cover;
+    width: 43%; 
+    height: 20%; 
+}
+
+.stamp_get-title{
+    font-size: 60px;
+    color: #114E72;
+    font-weight: 900;
+    text-shadow: -4px 5px 1px #9798a3;
+    text-align: center;
+    margin-top: 20%;
+}
+
+.stamp_get-stamp_gif{
+    max-width: 70%;
+}
+
+.stamp_get-back_container{
+    width: 70%;
+    height: 55px;
+    background-color: #f0cebc;
+    text-align: center;
+    padding-top: 11px;
+    padding-right: 22px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #114E72;
+    border-radius: 15px;
+}
+
+.stamp_get-arrow{
+    position: relative;
+    bottom: 65%;
+    left: 90%;
+    background-color: #DE9C90;
+    width: 30px;
+    height: 30px;
+    color: #f0cebc;
+    border-radius: 15px;
+}
+
+@media (max-width: 400px) {
+    .stamp_get-back_container{
+        width: 75%;
+        height: 55px;
+        background-color: #f0cebc;
+        text-align: center;
+        padding-top: 11px;
+        padding-right: 22px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #114E72;
+        border-radius: 15px;
+    }
+
+    .stamp_get-arrow{
+        position: relative;
+        bottom: 66%;
+        left: 92%;
+        background-color: #DE9C90;
+        width: 30px;
+        height: 30px;
+        color: #f0cebc;
+        border-radius: 15px;
+    }
+}

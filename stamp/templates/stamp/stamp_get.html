@@ -1,14 +1,22 @@
-<!DOCTYPE html>
-    {% load static %}
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>stamp_get</title>
-</head>
-<body>
-    <h1>テスト</h1>
-    <p>{{ user }}</p>
-    <p>{{ stamped }}</p>
-    <a href="{% url 'stamp' %}">スタンプゲット</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/stamp/stamp_get.css' %}">
+<title>stamp_get</title>
+{% endblock %}
+
+{% block content %}
+<div class="stamp_get-container">
+  <img class="stamp_get-background_image1" src="{% static 'img/pattern1.png' %}" alt="background-image">
+  <img class="stamp_get-background_image2" src="{% static 'img/pattern2.png' %}" alt="background-image">
+  <div class="stamp_get-title">
+      STAMP<br>GET!
+  </div>
+  <img class="stamp_get-stamp_gif" src="{% static 'img/stamp_get.png' %}" alt="スタンプラリー">
+  <a href="{% url 'stamp' %}" class="stamp_get-back_container">スタンプシートに戻る
+    <div class="stamp_get-arrow">→</div>
+  </a>
+</div>
+{% endblock %}

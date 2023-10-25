@@ -1,14 +1,29 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
 {% load static %}
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>login</title>
-  </head>
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login/login.css' %}">
+<title>login</title>
+{% endblock %}
 
-  <body>
-    <a href="{% url 'social:begin' 'line' %}?next={{ next }}">lineログイン</a>
-  </body>
-</html>
+{% block content %}
+<div class="login-container">
+  <img class="login-background_image1" src="{% static 'img/pattern1.png' %}" alt="background-image">
+  <img class="login-background_image2" src="{% static 'img/pattern2.png' %}" alt="background-image">
+  <div class="login-logo_container">
+      <img class="login-logo" src="{% static 'img/logo.png' %}" alt="スタンプラリー">
+  </div>
+  <div class="login-area">
+    <a href="{% url 'social:begin' 'line' %}?next={{ next }}" class="login-line_login">
+      <img src="{% static 'img/LINE.png' %}" alt="LINE Icon" class="login-line_icon">
+      <span class="login-line_text">LINEでログイン</span>
+    </a>
+  </div>
+  <p class="login-info_text">
+      赤羽に設置された5か所のQRコードを読み込んでスマホでサクサクスタンプをためよう!
+      <br>
+      すべてのスタンプが集まったら七福神広場で素敵な景品と交換しにいこう！
+  </p>
+</div>
+{% endblock %}
