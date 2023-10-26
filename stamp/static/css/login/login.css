@@ -9,7 +9,7 @@ body {
     display: grid;
     place-items: center;
     height: 100%;
-    grid-template-rows:3fr 0.7fr 2fr;
+    grid-template-rows:1fr 2fr 1fr 1.6fr;
 }
 
 .login-background_image1{
@@ -35,6 +35,12 @@ body {
     background-size: cover;
     width: 43%; 
     height: 20%; 
+}
+
+.login-title_text {
+    color: #114E72;
+    font-size: 5vw;
+    margin-top: 10%;
 }
 
 .login-logo_container {
@@ -81,6 +87,9 @@ body {
 }
 
 @media (max-width: 400px) {
+    .login-container {
+        grid-template-rows:1fr 2fr 1.2fr 1.2fr;
+    }
     .login-logo {
         max-width: 70%;
     }
