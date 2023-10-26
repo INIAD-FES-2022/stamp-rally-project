@@ -92,13 +92,19 @@
         ];
 
         const sheetSrc = "{% static 'image/stamp/sheet.png' %}";
-        const stampSrc = "{% static 'image/stamp/stamp.png' %}";
+        const stampSrc = [
+            "{% static 'image/stamp/stamp-1.png' %}",
+            "{% static 'image/stamp/stamp-2.png' %}",
+            "{% static 'image/stamp/stamp-3.png' %}",
+            "{% static 'image/stamp/stamp-4.png' %}",
+            "{% static 'image/stamp/stamp-5.png' %}",
+        ]
         const sheetImg = await loadImage(sheetSrc);
-        const stampImg = await loadImage(stampSrc);
+        const stampImg = await Promise.all(stampSrc.map(loadImage));
         ctx.drawImage(sheetImg, 0, 0);
 
         isHaveStamp.forEach((stamp, index) => {
-            stamp && ctx.drawImage(stampImg, stampOffsets[index].x, stampOffsets[index].y);
+            stamp && ctx.drawImage(stampImg[index], stampOffsets[index].x, stampOffsets[index].y);
         })
     }
 
