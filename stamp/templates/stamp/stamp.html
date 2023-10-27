@@ -48,13 +48,22 @@
             スタッフに見せながら
             ボタンを押してください
         </p>
-        <a href="{% url 'stamp' %}?used=true"
+
+        <form action="{% url 'stamp' %}" method="post">
+            {% csrf_token %}
+            <label for="password" class="form-label">パスワード</label>
+            <textarea type="text" id="password" name="password" rows="1" required></textarea>
+            <button id="modal-confirm" class="stamp-btn" type="submit">
+                景品を交換する
+            </button>
+            <button type="button" id="modal-cancel" class="stamp-btn">
+                キャンセル
+            </button>
+        </form>
+        <!-- <a href="{% url 'stamp' %}?used=true"
         id="modal-confirm" class="stamp-btn">
             景品を交換する
-        </a>
-        <button type="button" id="modal-cancel" class="stamp-btn">
-            キャンセル
-        </button>
+        </a> -->
     </div>
 </dialog>
 

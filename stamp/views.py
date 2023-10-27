@@ -47,17 +47,39 @@ class stamp(LoginRequiredMixin, TemplateView):
         context["stamps"] = user_info.stamps
 
         # 景品の管理
-        query = self.request.GET.get("used")
-        if query=="true":
+        #query = self.request.GET.get("used")
+        #if query=="true":
+            #update_stamps = user_info.stamps
+            #update_stamps[5] = True
+                
+            #user_info.stamps = update_stamps
+            #user_info.save()
+
+            #context["stamps"] = update_stamps
+
+        return context
+    
+    def post(self,request,*args,**kwargs):
+        password = request.POST['password']
+
+        # ユーザー情報取得
+        try:
+            user_info = Stamp.objects.get(user=self.request.user)
+
+        # 初期設定
+        except Stamp.DoesNotExist:
+            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
+            user_info = Stamp.objects.get(user=self.request.user)
+            print("ユーザー情報を新規作成しました。")
+
+        if password=="banecan":
             update_stamps = user_info.stamps
             update_stamps[5] = True
                 
             user_info.stamps = update_stamps
             user_info.save()
 
-            context["stamps"] = update_stamps
-
-        return context
+        return rd_index(request)
     
 class stamp_get(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp_get.html"
@@ -103,7 +125,13 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             user_info.stamps = update_stamps
             user_info.save()
 
-            context["stamps"] = update_stamps
+        # デバッグ用
+        if query == "get_all":
+            update_stamps = user_info.stamps
+            update_stamps = [True,True,True,True,True,False]
+                
+            user_info.stamps = update_stamps
+            user_info.save()
 
         # デバッグ用                
         elif query == "print":
@@ -113,19 +141,19 @@ class stamp_get(LoginRequiredMixin, TemplateView):
 
         return context
     
-class stamp_prize(LoginRequiredMixin, TemplateView):
-    template_name = "stamp/stamp_prize.html"
-    def get_context_data(self, **kwargs):
+#class stamp_prize(LoginRequiredMixin, TemplateView):
+    #template_name = "stamp/stamp_prize.html"
+    #def get_context_data(self, **kwargs):
 
         # ユーザー情報取得
-        try:
-            user_info = Stamp.objects.get(user=self.request.user)
+        #try:
+            #user_info = Stamp.objects.get(user=self.request.user)
 
         # 初期設定
-        except Stamp.DoesNotExist:
-            Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
-            user_info = Stamp.objects.get(user=self.request.user)
-            print("ユーザー情報を新規作成しました。")
+        #except Stamp.DoesNotExist:
+            #Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
+            #user_info = Stamp.objects.get(user=self.request.user)
+            #print("ユーザー情報を新規作成しました。")
 
         # htmlに渡すテンプレートの値
         # {{ user }} や {{ stamps }} で取得可能
@@ -134,11 +162,11 @@ class stamp_prize(LoginRequiredMixin, TemplateView):
         # {{ stamps }} はbool値のリスト
         # {{ stamps[0]~[4] が各地のスタンプ、stamps[5] は景品の獲得有無 }}
 
-        context = super().get_context_data(**kwargs)
-        context["user"] = user_info.user
-        context["stamps"] = user_info.stamps
+        #context = super().get_context_data(**kwargs)
+        #context["user"] = user_info.user
+        #context["stamps"] = user_info.stamps
 
-        return context
+        #return context
 
 class stamp_map(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp_map.html"

@@ -10,7 +10,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path("stamp/", views.stamp.as_view(), name="stamp"),
     path("stamp/get/<str:sponser>/", views.stamp_get.as_view(), name="stamp_get"),
-    path("stamp/prize/", views.stamp_prize.as_view(), name="stamp_prize"),
+    #path("stamp/prize/", views.stamp_prize.as_view(), name="stamp_prize"),
     path("stamp/map/", views.stamp_map.as_view(), name="stamp_map"),
     
     # 500エラー確認用
