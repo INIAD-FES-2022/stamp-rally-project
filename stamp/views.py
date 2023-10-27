@@ -101,10 +101,13 @@ class stamp_get(LoginRequiredMixin, TemplateView):
         # {{ user }} は各ユーザーが持つ一意の文字列
         # {{ stamped }} はスタンプが新たに押されたかどうかのbool値
             # 初回のみ演出ではない場合、無視してもらって大丈夫です。
+        # {{ stamp_num }} は押されたスタンプの番号
+            # デフォルト(押されていない場合)は-1を取ります。
 
         context = super().get_context_data(**kwargs)
         context["user"] = user_info.user
         context["stamped"] = False
+        context["stamp_num"] = -1
 
         # スタンプ付与
         query = self.kwargs["sponser"]
@@ -113,7 +116,8 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             if not update_stamps[query_lst.index(query)]:
                 context["stamped"] = True
             update_stamps[query_lst.index(query)] = True
-                
+            context["stamp_num"] = query_lst.index(query)
+
             user_info.stamps = update_stamps
             user_info.save()
 
@@ -136,7 +140,10 @@ class stamp_get(LoginRequiredMixin, TemplateView):
         # デバッグ用
         if query in ["0", "1", "2", "3", "4"]:
             update_stamps = user_info.stamps
+            if not update_stamps[query_lst.index(query)]:
+                context["stamped"] = True
             update_stamps[int(query)] = True
+            context["stamp_num"] = query_lst.index(query)
 
             user_info.stamps = update_stamps
             user_info.save()
