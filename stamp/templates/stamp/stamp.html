@@ -7,11 +7,90 @@
 {% endblock %}
 
 {% block content %}
-<div>
-    <canvas id="stamp-sheet" width="1080" height="1920"></canvas>
+<canvas id="stamp-sheet" width="1080" height="1920"></canvas>
+<div class="stamp-container">
+    <h2>Map</h2>
+    <div>
+        <img src={% static "image/stamp/map.png" %} alt="地図" width="2000" height="1414">
+        <button type="button" class="stamp-btn stamp-btn-primary">
+            チェックポイント<br>詳細マップ
+        </button>
+    </div>
+    <div class="stamp-bubble">
+        <p>
+            スタンプを５つすべて集め終わったら
+            Bivio近く七福神広場の景品交換所で
+            スタッフに個の画面を見せよう！
+        </p>
+    </div>
+    {% if stamps.5 %}
+        <img src={% static "image/stamp/ticket-used.png" %} alt="使用済チケット" width="280" height="115">
+    {% else %}
+        <img src={% static "image/stamp/ticket.png" %} alt="未使用チケット" width="280" height="115">
+    {% endif %}
+    <button type="button" id="prize-btn" class="stamp-btn stamp-btn-secondary" disabled>
+        景品交換をする
+    </button>
+    <p>
+        ※スタッフが指示するまでボタンを押さないでください
+    </p>
 </div>
+<footer class="stamp-footer">
+    <p>赤羽台祭実行委員会</p>
+</footer>
+
+<dialog id="stamp-modal">
+    <div>
+        <h1>利用確認</h1>
+        <p>
+            ご利用の際は必ず
+            七福神広場の景品交換所で
+            スタッフに見せながら
+            ボタンを押してください
+        </p>
+
+        <form action="{% url 'stamp' %}" method="post">
+            {% csrf_token %}
+            <label for="password" class="form-label">パスワード</label>
+            <textarea id="password" name="password" rows="1" required></textarea>
+            <button id="modal-confirm" class="stamp-btn" type="submit">
+                景品を交換する
+            </button>
+            <button type="button" id="modal-cancel" class="stamp-btn">
+                キャンセル
+            </button>
+        </form>
+        <!-- <a href="{% url 'stamp' %}?used=true"
+        id="modal-confirm" class="stamp-btn">
+            景品を交換する
+        </a> -->
+    </div>
+</dialog>
 
 <script>
+    const True = true;
+    const False = false;
+    {% autoescape off %}
+    const isHaveStamp = {{ stamps }}
+    {% endautoescape %}
+    const isTicketUsed = isHaveStamp.pop()
+
+    const modal = document.getElementById("stamp-modal");
+    const prizeBtn = document.getElementById("prize-btn");
+    prizeBtn.disabled = isTicketUsed || !isHaveStamp.every((stamp) => stamp);
+    prizeBtn.addEventListener("click", () => {
+        modal.showModal();
+    });
+    const modalConfirm = document.getElementById("modal-confirm");
+    const modalCancel = document.getElementById("modal-cancel");
+    modalConfirm.addEventListener("click", () => {
+        modal.close();
+    })
+    modalCancel.addEventListener("click", () => {
+        modal.close();
+    })
+
+
     const render = async (ctx) => {
         const stampOffsets = [
             { x: 662, y: 162 },
@@ -22,20 +101,19 @@
         ];
 
         const sheetSrc = "{% static 'image/stamp/sheet.png' %}";
-        const stampSrc = "{% static 'image/stamp/stamp.png' %}";
+        const stampSrc = [
+            "{% static 'image/stamp/stamp-1.png' %}",
+            "{% static 'image/stamp/stamp-2.png' %}",
+            "{% static 'image/stamp/stamp-3.png' %}",
+            "{% static 'image/stamp/stamp-4.png' %}",
+            "{% static 'image/stamp/stamp-5.png' %}",
+        ]
         const sheetImg = await loadImage(sheetSrc);
-        const stampImg = await loadImage(stampSrc);
+        const stampImg = await Promise.all(stampSrc.map(loadImage));
         ctx.drawImage(sheetImg, 0, 0);
 
-        const True = true;
-        const False = false;
-        {% autoescape off %}
-        const isHaveStamp = {{ stamps }}
-        {% endautoescape %}
-        isHaveStamp.pop()
-
         isHaveStamp.forEach((stamp, index) => {
-            stamp && ctx.drawImage(stampImg, stampOffsets[index].x, stampOffsets[index].y);
+            stamp && ctx.drawImage(stampImg[index], stampOffsets[index].x, stampOffsets[index].y);
         })
     }
 
