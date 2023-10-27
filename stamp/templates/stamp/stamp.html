@@ -52,7 +52,7 @@
         <form action="{% url 'stamp' %}" method="post">
             {% csrf_token %}
             <label for="password" class="form-label">パスワード</label>
-            <textarea type="text" id="password" name="password" rows="1" required></textarea>
+            <textarea id="password" name="password" rows="1" required></textarea>
             <button id="modal-confirm" class="stamp-btn" type="submit">
                 景品を交換する
             </button>
