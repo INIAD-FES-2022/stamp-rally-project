@@ -126,7 +126,7 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             user_info.save()
 
         # デバッグ用
-        if query == "get_all":
+        if query == "all":
             update_stamps = user_info.stamps
             update_stamps = [True,True,True,True,True,False]
                 
