@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-    {% load static %}
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>stamp_map</title>
-</head>
-<body>
-    <h1>テスト</h1>
-    <a href="{% url 'stamp' %}">トップページに戻る</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/stamp/stamp_map.css' %}">
+<title>map</title>
+{% endblock %}
+
+{% block content %}
+<div class="map-container">
+    <h2>アピレ</h2>
+    <img src={% static "image/map/アピレ.png" %} alt="アピレの地図">
+    <h2>イトーヨーカドー</h2>
+    <img src={% static "image/map/イトーヨーカドー.png" %} alt="イトーヨーカドーの地図">
+    <h2>ビーンズ</h2>
+    <img src={% static "image/map/ビーンズ.png" %} alt="ビーンズの地図">
+    <h2>Bivio</h2>
+    <img src={% static "image/map/ビビオ.png" %} alt="ビビオの地図">
+</div>
+{% endblock %}

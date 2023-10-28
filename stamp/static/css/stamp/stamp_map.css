@@ -1,0 +1,28 @@
+body {
+  --bg-color: #f4e4d7;
+  --text-color-primary: #114e72;
+  --button-color-primary: #9ad0d3;
+  --text-color-secondary: #a43b28;
+  --button-color-secondary: #edbea4;
+
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+}
+
+.map-container {
+  max-width: 640px;
+  margin-inline: auto;
+  margin-block: 2rem;
+  padding-inline: 2rem;
+
+  & h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
