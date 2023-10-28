@@ -9,7 +9,6 @@ body {
     display: grid;
     place-items: center;
     height: 100%;
-    grid-template-rows:1fr 2fr 0.4fr 1fr;
 }
 
 .stamp_get-background_image1{
@@ -43,7 +42,7 @@ body {
     font-weight: 900;
     text-shadow: -4px 5px 1px #9798a3;
     text-align: center;
-    margin-top: 20%;
+    margin-top: 10%;
 }
 
 .stamp_get-stamp_gif{
