@@ -14,5 +14,5 @@ urlpatterns = [
     path("stamp/map/", views.stamp_map.as_view(), name="stamp_map"),
     
     # 500エラー確認用
-    path('test/', views.my_test_500_view, name='test')
+    #path('test/', views.my_test_500_view, name='test')
 ]

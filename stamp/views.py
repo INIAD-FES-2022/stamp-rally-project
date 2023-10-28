@@ -122,37 +122,37 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             user_info.save()
 
         # デバッグ用
-        if query == "reset":
-            update_stamps = user_info.stamps
-            update_stamps = [False,False,False,False,False,False]
+        #if query == "reset":
+            #update_stamps = user_info.stamps
+            #update_stamps = [False,False,False,False,False,False]
                 
-            user_info.stamps = update_stamps
-            user_info.save()
+            #user_info.stamps = update_stamps
+            #user_info.save()
 
         # デバッグ用
-        if query == "all":
-            update_stamps = user_info.stamps
-            update_stamps = [True,True,True,True,True,False]
+        #if query == "all":
+            #update_stamps = user_info.stamps
+            #update_stamps = [True,True,True,True,True,False]
                 
-            user_info.stamps = update_stamps
-            user_info.save()
+            #user_info.stamps = update_stamps
+            #user_info.save()
 
         # デバッグ用
-        if query in ["0", "1", "2", "3", "4"]:
-            update_stamps = user_info.stamps
-            if not update_stamps[query_lst.index(query)]:
-                context["stamped"] = True
-            update_stamps[int(query)] = True
-            context["stamp_num"] = query_lst.index(query)
+        #if query in ["0", "1", "2", "3", "4"]:
+            #update_stamps = user_info.stamps
+            #if not update_stamps[query_lst.index(query)]:
+                #context["stamped"] = True
+            #update_stamps[int(query)] = True
+            #context["stamp_num"] = query_lst.index(query)
 
-            user_info.stamps = update_stamps
-            user_info.save()
+            #user_info.stamps = update_stamps
+            #user_info.save()
 
         # デバッグ用
-        if query == "print":
-            print(context["user"])
-            print(context["stamped"])
-            print(user_info.stamps)
+        #if query == "print":
+            #print(context["user"])
+            #print(context["stamped"])
+            #print(user_info.stamps)
 
         return context
     
@@ -191,7 +191,7 @@ class redirect_stamp(RedirectView):
 rd_index = redirect_stamp.as_view()
 
 # 500エラー確認用
-from django.http import HttpResponseServerError
-def my_test_500_view(request):
+#from django.http import HttpResponseServerError
+#def my_test_500_view(request):
     # Return an "Internal Server Error" 500 response code.
-    return HttpResponseServerError
+    #return HttpResponseServerError
