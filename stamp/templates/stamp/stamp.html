@@ -12,9 +12,9 @@
     <h2>Map</h2>
     <div>
         <img src={% static "image/stamp/map.png" %} alt="地図" width="2000" height="1414">
-        <button type="button" class="stamp-btn stamp-btn-primary">
+        <a type="button" class="stamp-btn stamp-btn-primary" href="{% url 'stamp_map' %}">
             チェックポイント<br>詳細マップ
-        </button>
+        </a>
     </div>
     <div class="stamp-bubble">
         <p>
@@ -52,7 +52,7 @@
         <form action="{% url 'stamp' %}" method="post">
             {% csrf_token %}
             <label for="password" class="form-label">パスワード</label>
-            <textarea id="password" name="password" rows="1" required></textarea>
+            <input type="text" id="password" name="password" required></input>
             <button id="modal-confirm" class="stamp-btn" type="submit">
                 景品を交換する
             </button>
@@ -60,10 +60,6 @@
                 キャンセル
             </button>
         </form>
-        <!-- <a href="{% url 'stamp' %}?used=true"
-        id="modal-confirm" class="stamp-btn">
-            景品を交換する
-        </a> -->
     </div>
 </dialog>
 
