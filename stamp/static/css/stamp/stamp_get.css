@@ -60,6 +60,7 @@ body {
     font-weight: bold;
     color: #114E72;
     border-radius: 15px;
+    margin-bottom: 35%;
 }
 
 .stamp_get-arrow{
@@ -72,6 +73,10 @@ body {
     color: #f0cebc;
     border-radius: 15px;
 }
+
+/* .stamp_get-recommend {
+    margin-bottom: 15%;
+} */
 
 @media (max-width: 400px) {
     .stamp_get-stamp_gif{
