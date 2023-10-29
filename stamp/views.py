@@ -138,12 +138,13 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             user_info.save()
 
         # デバッグ用
-        if query in ["0", "1", "2", "3", "4"]:
+        debug_lst = ["0", "1", "2", "3", "4"]
+        if query in debug_lst:
             update_stamps = user_info.stamps
-            if not update_stamps[query_lst.index(query)]:
+            if not update_stamps[debug_lst.index(query)]:
                 context["stamped"] = True
             update_stamps[int(query)] = True
-            context["stamp_num"] = query_lst.index(query)
+            context["stamp_num"] = debug_lst.index(query)
 
             user_info.stamps = update_stamps
             user_info.save()
