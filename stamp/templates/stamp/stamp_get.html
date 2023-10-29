@@ -12,11 +12,29 @@
   <img class="stamp_get-background_image1" src="{% static 'image/background/pattern1.png' %}" alt="background-image">
   <img class="stamp_get-background_image2" src="{% static 'image/background/pattern2.png' %}" alt="background-image">
   <div class="stamp_get-title">
-      STAMP<br>GET!
+      STAMP
   </div>
   <img class="stamp_get-stamp_gif" src="{% static 'image/stamp/stamp_get.gif' %}" alt="スタンプラリー">
   <a href="{% url 'stamp' %}" class="stamp_get-back_container">スタンプシートに戻る
     <div class="stamp_get-arrow">→</div>
   </a>
+  <!-- <img src="" class="stamp_get-recommend"> -->
 </div>
+
+<!-- <script>
+    {% autoescape off %}
+    const stampNum = {{ stamp_num }};
+    {% endautoescape %}
+
+    const recommendSrc = [
+        '{% static "image/recommend/benas.png" %}',
+        '{% static "image/recommend/bibio.png" %}',
+        '{% static "image/recommend/img3.png" %}',
+        // add imgae
+    ];
+    
+    // stampNumに基づいてimgタグのsrcを変更
+    document.querySelector(".stamp_get-recommend").src = recommendSrc[stampNum];
+</script> -->
+
 {% endblock %}
