@@ -36,13 +36,20 @@ body {
     height: 20%; 
 }
 
+#stamp_get-place_name {
+    margin-top: 10%;
+    color: #114E72;
+    font-weight: 900;
+    font-size: large;
+    margin-bottom: -10%;
+}
+
 .stamp_get-title{
     font-size: 60px;
     color: #114E72;
     font-weight: 900;
     text-shadow: -4px 5px 1px #9798a3;
     text-align: center;
-    margin-top: 10%;
 }
 
 .stamp_get-stamp_gif{
@@ -74,13 +81,17 @@ body {
     border-radius: 15px;
 }
 
-/* .stamp_get-recommend {
-    margin-bottom: 15%;
-} */
+.stamp_get-recommend {
+    /* margin-bottom: 15%; */
+    width: 85%;
+}
 
-@media (max-width: 400px) {
+@media (max-width: 380px) {
     .stamp_get-stamp_gif{
-        max-width: 80%;
+        max-width: 70%;
+    }
+    .stamp_get-title{
+        font-size: 50px;
     }
     .stamp_get-back_container{
         width: 75%;
