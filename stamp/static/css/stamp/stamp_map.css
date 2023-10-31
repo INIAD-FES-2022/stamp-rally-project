@@ -14,21 +14,22 @@ body {
 
 .map-container {
   max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-inline: auto;
+  padding: 2rem;
 }
 
 .map-container h2 {
   font-size: 2rem;
+  line-height: 1;
   text-align: center;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
 }
 
-.map-container h2:first-child {
-  margin-top: 0;
+.map-container div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
