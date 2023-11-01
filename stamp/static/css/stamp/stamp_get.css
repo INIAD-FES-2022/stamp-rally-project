@@ -6,42 +6,42 @@ body {
 
 .stamp_get-container {
     max-width: 100vw;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     height: 100%;
 }
 
 .stamp_get-background_image1{
     position: absolute;
-    top: 0; 
-    left: 0; 
-    z-index: -1; 
-    width: auto; 
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: auto;
     height: auto;
     background-size: cover;
-    width: 40%; 
-    height: 27%; 
-    
+    width: 40%;
+    height: 27%;
 }
 
 .stamp_get-background_image2{
     position: absolute;
-    bottom: 0; 
-    right: 0; 
-    z-index: -1; 
-    width: auto; 
-    height: auto; 
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    width: auto;
+    height: auto;
     background-size: cover;
-    width: 43%; 
-    height: 20%; 
+    width: 43%;
+    height: 20%;
 }
 
 #stamp_get-place_name {
-    margin-top: 10%;
     color: #114E72;
     font-weight: 900;
     font-size: large;
-    margin-bottom: -10%;
 }
 
 .stamp_get-title{
@@ -67,7 +67,6 @@ body {
     font-weight: bold;
     color: #114E72;
     border-radius: 15px;
-    margin-bottom: 35%;
 }
 
 .stamp_get-arrow{
