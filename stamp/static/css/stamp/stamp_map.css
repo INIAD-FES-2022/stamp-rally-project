@@ -33,3 +33,37 @@ body {
   align-items: center;
   gap: 1rem;
 }
+
+.map-back-button {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  place-items: center;
+  border-radius: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 12rem;
+  min-height: 3rem;
+  font-size: 1rem;
+  padding-left: 1rem 0.5rem;
+  background-color: #f4d7c5;
+  color: #a43b28;
+  color: var(--text-color);
+}
+
+.map-back-button:before {
+  position: absolute;
+  content: "→";
+  display: grid;
+  place-items: center;
+  background-color: #de9c90;
+  color: #f4d7c5;
+  border-radius: 50%;
+  font-size: 1rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+}

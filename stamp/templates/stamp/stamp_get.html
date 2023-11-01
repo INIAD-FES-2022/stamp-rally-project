@@ -11,7 +11,9 @@
 <div class="stamp_get-container">
   <img class="stamp_get-background_image1" src="{% static 'image/background/pattern1.png' %}" alt="background-image">
   <img class="stamp_get-background_image2" src="{% static 'image/background/pattern2.png' %}" alt="background-image">
-  <p id="stamp_get-place_name"></p>
+  <p id="stamp_get-place_name">
+    {{ place_name }}
+  </p>
   <div class="stamp_get-title">
       STAMP
   </div>
@@ -19,39 +21,13 @@
   <a href="{% url 'stamp' %}" class="stamp_get-back_container">スタンプシートに戻る
     <div class="stamp_get-arrow">→</div>
   </a>
-  <img src="" class="stamp_get-recommend">
+  {% if stamp_num == 0 %}
+  <img src="{% static 'image/recommend/apire.png' %}" class="stamp_get-recommend">
+  {% elif stamp_num == 2 %}
+  <img src="{% static 'image/recommend/beans.png' %}" class="stamp_get-recommend">
+  {% elif stamp_num == 3 %}
+  <img src="{% static 'image/recommend/bivio.png' %}" class="stamp_get-recommend">
+  {% endif %}
 </div>
-
-<script>
-    {% autoescape off %}
-    const stampNum = {{ stamp_num }}
-    {% endautoescape %}
-
-    const placeList = [
-      "アピレ", "イトーヨーカドー", "ビーンズ", "ビビオ", "キャンパス"
-    ];
-
-    console.log(typeof stampNum);
-
-    document.getElementById("stamp_get-place_name").innerHTML = placeList[Number(stampNum)];
-
-    const recommendSrc = [
-        '{% static "image/recommend/apire.png" %}',
-        '',
-        '{% static "image/recommend/beans.png" %}',
-        '',
-        '',
-    ];
-
-    // stampNumに基づいてimgタグのsrcを変更
-    document.querySelector(".stamp_get-recommend").src = recommendSrc[stampNum];
-    
-    // 画像がある場合にCSSを修正
-    if (stampNum === 0 || stampNum === 2) {
-      document.querySelector(".stamp_get-back_container").style.marginBottom = "1%";
-      document.querySelector(".stamp_get-recommend").style.marginBottom = "15%";
-      document.querySelector("#stamp_get-place_name").style.marginBottom = "0%";
-    }
-</script>
 
 {% endblock %}
