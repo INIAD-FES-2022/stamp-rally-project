@@ -16,7 +16,7 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.environ.get('DJANGO_DEBUG') == 'True' else False
-
+DEBUG500 = True if os.environ.get('DJANGO_500_TEST') == 'True' else False
 
 # 各地のQRが持つURL
 # https://ドメイン/stamp/get/UUID/
@@ -176,7 +176,7 @@ class stamp_map(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp_map.html"
 
 class redirect_stamp(RedirectView):
-    if DEBUG:
+    if DEBUG or ((not DEBUG) and DEBUG500):
         url = "http://127.0.0.1:8000/stamp/"
     else:
         url = "https://stamp.akabanedai-fes.com/stamp/"
@@ -186,4 +186,7 @@ rd_index = redirect_stamp.as_view()
 from django.http import HttpResponseServerError
 def my_test_500_view(request):
     # Return an "Internal Server Error" 500 response code.
-    return HttpResponseServerError
+    if DEBUG:
+        return HttpResponseServerError
+    else:
+        return rd_index(request)
