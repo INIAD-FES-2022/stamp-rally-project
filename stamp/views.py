@@ -4,6 +4,19 @@ from .models import Stamp
 from django.shortcuts import render
 from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from pathlib import Path
+import os, environ
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Get env
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, ".env"))
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True if os.environ.get('DJANGO_DEBUG') == 'True' else False
+
 
 # 各地のQRが持つURL
 # https://ドメイン/stamp/get/UUID/
@@ -54,17 +67,6 @@ class stamp(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["user"] = user_info.user
         context["stamps"] = user_info.stamps
-
-        # 景品の管理
-        #query = self.request.GET.get("used")
-        #if query=="true":
-            #update_stamps = user_info.stamps
-            #update_stamps[5] = True
-
-            #user_info.stamps = update_stamps
-            #user_info.save()
-
-            #context["stamps"] = update_stamps
 
         return context
 
@@ -135,7 +137,7 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             user_info.save()
 
         # デバッグ用
-        if query == "reset":
+        if (query == "reset") and DEBUG:
             update_stamps = user_info.stamps
             update_stamps = [False,False,False,False,False,False]
 
@@ -143,7 +145,7 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             user_info.save()
 
         # デバッグ用
-        if query == "all":
+        if (query == "all") and DEBUG:
             update_stamps = user_info.stamps
             update_stamps = [True,True,True,True,True,False]
 
@@ -152,7 +154,7 @@ class stamp_get(LoginRequiredMixin, TemplateView):
 
         # デバッグ用
         debug_lst = ["0", "1", "2", "3", "4"]
-        if query in debug_lst:
+        if (query in debug_lst) and DEBUG:
             update_stamps = user_info.stamps
             if not update_stamps[debug_lst.index(query)]:
                 context["stamped"] = True
@@ -163,45 +165,21 @@ class stamp_get(LoginRequiredMixin, TemplateView):
             user_info.save()
 
         # デバッグ用
-        if query == "print":
+        if (query == "print") and DEBUG:
             print(context["user"])
             print(context["stamped"])
             print(user_info.stamps)
 
         return context
 
-#class stamp_prize(LoginRequiredMixin, TemplateView):
-    #template_name = "stamp/stamp_prize.html"
-    #def get_context_data(self, **kwargs):
-
-        # ユーザー情報取得
-        #try:
-            #user_info = Stamp.objects.get(user=self.request.user)
-
-        # 初期設定
-        #except Stamp.DoesNotExist:
-            #Stamp.objects.create(user=self.request.user, stamps=[False,False,False,False,False,False])
-            #user_info = Stamp.objects.get(user=self.request.user)
-            #print("ユーザー情報を新規作成しました。")
-
-        # htmlに渡すテンプレートの値
-        # {{ user }} や {{ stamps }} で取得可能
-
-        # {{ user }} は各ユーザーが持つ一意の文字列
-        # {{ stamps }} はbool値のリスト
-        # {{ stamps[0]~[4] が各地のスタンプ、stamps[5] は景品の獲得有無 }}
-
-        #context = super().get_context_data(**kwargs)
-        #context["user"] = user_info.user
-        #context["stamps"] = user_info.stamps
-
-        #return context
-
 class stamp_map(LoginRequiredMixin, TemplateView):
     template_name = "stamp/stamp_map.html"
 
 class redirect_stamp(RedirectView):
-    url = "http://127.0.0.1:8000/stamp/"
+    if DEBUG:
+        url = "http://127.0.0.1:8000/stamp/"
+    else:
+        url = "https://stamp.akabanedai-fes.com/stamp/"
 rd_index = redirect_stamp.as_view()
 
 # 500エラー確認用
