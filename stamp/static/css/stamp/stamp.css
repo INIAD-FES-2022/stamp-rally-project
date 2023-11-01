@@ -203,8 +203,8 @@ body {
   content: "";
   position: absolute;
   right: 0;
-  bottom: calc(1.2rem * -1);
-  bottom: calc(var(--size) * -1);
+  bottom: calc(1.2rem * -1 + 1px);
+  bottom: calc(var(--size) * -1 + 1px);
   background: inherit;
   width: 1.2rem;
   width: var(--size);
